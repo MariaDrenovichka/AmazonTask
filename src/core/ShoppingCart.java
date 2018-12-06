@@ -2,6 +2,7 @@ package core;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,10 @@ import org.openqa.selenium.remote.server.handler.FindActiveElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+
+
 
 
 
@@ -58,25 +63,30 @@ public class ShoppingCart {
 	public static void selectFirstItem() {
 		WebDriverWait wait = new WebDriverWait(Browser.driver, 20); // seconds
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='result_2']")));
-		WebElement firstItem = Browser.driver.findElement(By.xpath("//*[@class='s-access-image cfMarker']"));// ("//*[@class='a-row
-																												// a-spacing-base']"));
+		WebElement firstItem = Browser.driver.findElement(By.xpath("//*[@class='s-access-image cfMarker']"));
+		String expectedItem = firstItem.getText();															
 		firstItem.click();
 	}
 	
 	public static void selectNumberOfItems() {
+		String numberOfItems = "option[value='3']";
 		WebElement quantity = Browser.driver.findElement(By.xpath("//*[@class='a-dropdown-container']"));
-//		Select numberOfItems = new Select(Browser.driver.findElement(By.name("quantity")));
-//		numberOfItems.selectByIndex(4);
 		quantity.click();
-		Select numberOfItems = new Select(Browser.driver.findElement(By.name("quantity")));
-		List <WebElement> list = numberOfItems.getOptions();
-		list.get(2);
+		
+		Browser.driver.findElement(By.cssSelector(numberOfItems)).click();
+//		WebElement selectQuant = Browser.driver.findElement(By.xpath("//*[@tabindex='-1']"));
+//		Select numberOfItems = new Select(selectQuant);
+////		List <WebElement> list = numberOfItems.getOptions();
+////		list.get(2);
+//		numberOfItems.selectByIndex(2);
 		Browser.driver.findElement(By.id("add-to-cart-button")).click();
 	}
-//
-//	public static void waitToRedirect() {
-//		// TODO Auto-generated method stub
-//		WebDriverWait wait = new WebDriverWait(Browser.driver, 20); // seconds
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(firstElementXpath)));
-//	}
+	public static void navigateToCart() {
+		Browser.driver.findElement(By.id("hlb-view-cart-announce")).click();
+	}
+    public static void verifyThePurchese() {
+	
+    	WebElement actualItem = Browser.driver.findElement(By.xpath("//*[@class='a-size-medium sc-product-title a-text-bold']"));
+    	Assert.assertEquals(expectedItem, actualItem);
+    }
 }

@@ -26,9 +26,4 @@ public class Browser {
 	public static void goTo() {
 		Browser.driver.get("https://www.amazon.com");
 	}
-
-	public static void waitForMe() {
-		Scanner sc = new Scanner(System.in);
-		int i = sc.nextInt();
-	}
 }
