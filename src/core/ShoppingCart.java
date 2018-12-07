@@ -33,7 +33,7 @@ public class ShoppingCart {
 
 	public static void selectCategory() {
 		Browser.driver.findElement(By.xpath("//*[contains(text(), 'See All 37 Departments')]")).click();
-		WebElement scrollToElement = Browser.driver.findElement(By.xpath("//li[7]/span/a/h4"));
+		WebElement scrollToElement = Browser.driver.findElement(By.xpath("//li[8]/span/a/h4"));
 		JavascriptExecutor js = (JavascriptExecutor) Browser.driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", scrollToElement);
 		scrollToElement.click();
@@ -60,33 +60,40 @@ public class ShoppingCart {
 		above14.click();
 	}
 
-	public static void selectFirstItem() {
+	public static void addFirstItemToCart() {
+		
+		String numberOfItems = "option[value='2']";
+		String addToCartId = "add-to-cart-button";
+		
 		WebDriverWait wait = new WebDriverWait(Browser.driver, 20); // seconds
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='result_2']")));
 		WebElement firstItem = Browser.driver.findElement(By.xpath("//*[@class='s-access-image cfMarker']"));
-		String expectedItem = firstItem.getText();															
 		firstItem.click();
-	}
-	
-	public static void selectNumberOfItems() {
-		String numberOfItems = "option[value='3']";
-		WebElement quantity = Browser.driver.findElement(By.xpath("//*[@class='a-dropdown-container']"));
-		quantity.click();
-		
-		Browser.driver.findElement(By.cssSelector(numberOfItems)).click();
+		WebElement selectedItem = Browser.driver.findElement(By.id("productTitle"));
+		String expectedItem = selectedItem.getText();															
+
+		if (Browser.driver.findElements(By.xpath("//*[@class='a-dropdown-container']")).isEmpty()) {
+			Browser.driver.findElement(By.id(addToCartId)).click();  	
+	    }else {
+	    	WebElement quantity = Browser.driver.findElement(By.xpath("//*[@class='a-dropdown-container']"));
+		    quantity.click();
+			Browser.driver.findElement(By.cssSelector(numberOfItems)).click();
+			Browser.driver.findElement(By.id(addToCartId)).click();
+
 //		WebElement selectQuant = Browser.driver.findElement(By.xpath("//*[@tabindex='-1']"));
 //		Select numberOfItems = new Select(selectQuant);
 ////		List <WebElement> list = numberOfItems.getOptions();
 ////		list.get(2);
 //		numberOfItems.selectByIndex(2);
-		Browser.driver.findElement(By.id("add-to-cart-button")).click();
-	}
-	public static void navigateToCart() {
+		}
+		
+//	}
+//	public static void navigateToCart() {
 		Browser.driver.findElement(By.id("hlb-view-cart-announce")).click();
-	}
-    public static void verifyThePurchese() {
+//	}
+//    public static void verifyThePurchese() {
 	
     	WebElement actualItem = Browser.driver.findElement(By.xpath("//*[@class='a-size-medium sc-product-title a-text-bold']"));
-    	Assert.assertEquals(expectedItem, actualItem);
+    	Assert.assertEquals(expectedItem, actualItem.getText());
     }
 }

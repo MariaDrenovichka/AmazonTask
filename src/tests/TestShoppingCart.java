@@ -25,8 +25,8 @@ public class TestShoppingCart {
 		ShoppingCart.setPriceRange();
 		ShoppingCart.waitForElementToPresent();
 		ShoppingCart.selectAge();
-		ShoppingCart.selectFirstItem();
-		ShoppingCart.selectNumberOfItems();
+		ShoppingCart.addFirstItemToCart();
+//		ShoppingCart.selectNumberOfItems();
 	}
 
 //	@After
