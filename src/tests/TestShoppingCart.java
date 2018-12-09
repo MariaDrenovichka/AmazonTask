@@ -3,10 +3,6 @@ package tests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-
-import com.google.common.base.Verify;
-
 import core.Browser;
 import core.ShoppingCart;
 
@@ -18,7 +14,7 @@ public class TestShoppingCart {
 	}
 
 	@Test
-	public void searchForAnItem() {
+	public void compareSelectedAndTheItemInTheCart() {
 		Browser.goTo();
 		ShoppingCart.seachAnItem();
 		ShoppingCart.selectCategory();
@@ -26,11 +22,14 @@ public class TestShoppingCart {
 		ShoppingCart.waitForElementToPresent();
 		ShoppingCart.selectAge();
 		ShoppingCart.addFirstItemToCart();
-//		ShoppingCart.selectNumberOfItems();
+		ShoppingCart.selectQuantity();
+		ShoppingCart.navigateToCart();
+     	ShoppingCart.verifyCorrectItemIsInTheCart();
 	}
 
-//	@After
-//	public void tearDown() {
-//		Browser.quit();
-//	}
+	@After
+	public void tearDown() {
+		Browser.quit();
+	}
+	
 }
