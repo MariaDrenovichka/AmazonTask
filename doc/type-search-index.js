@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"core","l":"Browser"},{"p":"core","l":"ShoppingCart"},{"p":"tests","l":"TestShoppingCart"}]

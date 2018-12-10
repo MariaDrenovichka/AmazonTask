@@ -27,8 +27,6 @@ public class TestShoppingCart extends ShoppingCart{
 		ShoppingCart.navigateToCart();
      	ShoppingCart.checkItemInTheCart();
     	Assert.assertEquals(getExpectedItem(), getActualItem());
-    	System.out.println(getExpectedItem());
-    	System.out.println(getActualItem());
 	}
 
 	@After
