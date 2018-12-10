@@ -1,6 +1,5 @@
 package core;
 
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,7 @@ public class Browser {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public static void quit() {
@@ -24,6 +23,6 @@ public class Browser {
 	}
 
 	public static void goTo() {
-		Browser.driver.get("https://www.amazon.com");
+		driver.get("https://www.amazon.com");
 	}
 }
